@@ -12,6 +12,11 @@ const server = http.createServer((req, res) => {
     res.write('<body><h1>Enter Your Details</h1></body>')
     res.write('<form>')
     res.write('<input type="text" name="username" placeholder="Enter your name">')
+    res.write('<label for="male">Male</label>')
+    res.write('<input type="radio" id="male" name="gender" value="male" >')
+    res.write('<label for="female">Female</label>')
+    res.write('<input type="radio" id="female" name="gender" value="female" >')
+    res.write('<input type="submit" value="Submit" >')
     res.write('</form>')
     res.write('</html>')
   }
