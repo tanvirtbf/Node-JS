@@ -5,7 +5,16 @@ const server = http.createServer((req, res) => {
   console.log(req.method)
   console.log(req.headers)
 
-  
+  if(req.url === '/'){
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<html>')
+    res.write('<head><title>Home Page</title></head>')
+    res.write('<body><h1>Enter Your Details</h1></body>')
+    res.write('<form>')
+    res.write('<input type="text" name="username" placeholder="Enter your name">')
+    res.write('</form>')
+    res.write('</html>')
+  }
 
 
 
