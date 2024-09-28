@@ -19,7 +19,6 @@ const server = http.createServer((req, res) => {
     res.write('<input type="submit" value="Submit" >')
     res.write('</form>')
     res.write('</html>')
-
     res.end()
   }
 
