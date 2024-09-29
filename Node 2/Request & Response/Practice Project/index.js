@@ -41,7 +41,19 @@ function createMyServer(req, res) {
   } else if (req.url === "/") {
     res.write(commonHtml('Home'));
     return res.end()
-  }
+  } else if(req.url === '/men'){
+    res.write(commonHtml('Men'))
+    return res.end()
+  } else if(req.url === '/women'){
+    res.write(commonHtml('Women'))
+    return res.end()
+  } else if(req.url === '/kids'){
+    res.write(commonHtml('Kids'))
+    return res.end()
+  } else if(req.url === '/cart'){
+    res.write(commonHtml('Kids'))
+    return res.end()
+  } 
 }
 
 const server = http.createServer(createMyServer);
