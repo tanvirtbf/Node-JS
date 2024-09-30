@@ -38,19 +38,32 @@ if (req.url === "/") {
 
     const body = []
     req.on('data', (chunk)=> {
-      console.log(chunk)
+      // console.log(chunk)
       body.push(chunk)
     })
     req.on('end', ()=> {
+      // console.log(body.toString())
       const parsedBody = Buffer.concat(body).toString()
-      console.log(parsedBody)
+      //OR..
+      // const parsedBody = body.toString()
+
+      const params = new URLSearchParams(parsedBody)
+      console.log(params)
+      // const bodyObject = {}
+      // for(const [key,val] of params.entries()){
+      //   bodyObject[key] = val
+      // }
+      const bodyObject = Object.fromEntries(params)
+      console.log(bodyObject)
+      fs.writeFileSync('user.txt',JSON.stringify(bodyObject))
     })
 
-    fs.writeFileSync('user.txt','Tanvir Ahmed')
     res.statusCode = 302 // 302 mane holo redirection
     res.setHeader('Location','/')
 
   }
+
+
   res.setHeader("Content-Type", "text/html");
   res.write("<html>");
   res.write("<head><title>Error Page</title></head>");
