@@ -4,7 +4,7 @@ const fs = require("fs");
 const server = http.createServer((req, res) => {
   console.log(req.url)
   console.log(req.method)
-  console.log(req.headers)
+  // console.log(req.headers)
 
 
 if (req.url === "/") {
@@ -35,6 +35,16 @@ if (req.url === "/") {
     return res.end();
 
   } else if(req.url.toLowerCase() === '/submit-details' && req.method === 'POST'){
+
+    const body = []
+    req.on('data', (chunk)=> {
+      console.log(chunk)
+      body.push(chunk)
+    })
+    req.on('end', ()=> {
+      const parsedBody = Buffer.concat(body).toString()
+      console.log(parsedBody)
+    })
 
     fs.writeFileSync('user.txt','Tanvir Ahmed')
     res.statusCode = 302 // 302 mane holo redirection
