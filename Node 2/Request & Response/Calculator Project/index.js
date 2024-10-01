@@ -1,10 +1,7 @@
 const http = require("http");
-const fs = require("fs");
+const requestServer = require("./app");
 
-function createMyServer(req, res) {
-  
-}
 
-const server = http.createServer(createMyServer);
+const server = http.createServer(requestServer);
 
 server.listen(3001);
