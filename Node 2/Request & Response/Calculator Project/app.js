@@ -1,4 +1,5 @@
-const fs = require('fs')
+
+const sumRequestHandler = require('./sum');
 
 const requestServer = (req, res) => {
 
@@ -42,22 +43,7 @@ const requestServer = (req, res) => {
       res.write(form)
       res.end()
     }else if(req.url === '/calculator-data' && req.method === 'POST'){
-      const body = []
-      req.on('data',(chunk)=>{
-        body.push(chunk)
-      })
-      req.on('end',()=>{
-        const formObject = {}
-        const fullBody = Buffer.concat(body).toString()
-        const bodyObject = new URLSearchParams(fullBody)
-        for(const [key,value] of bodyObject.entries()){
-          formObject[key] = value
-        }
-        result = Number(formObject.firstNumber) + Number(formObject.lastNumber) 
-        console.log(result)
-        fs.writeFileSync('user.txt', JSON.stringify(formObject))
-      })
-      res.end()
+      sumRequestHandler(req,res)
     }
 
 };
