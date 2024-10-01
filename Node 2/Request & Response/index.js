@@ -1,7 +1,7 @@
 const http = require("http");
 const userRequestHandler = require('./app')
 
-const server = http.createServer();
+const server = http.createServer(userRequestHandler);
 
 const PORT = 3000;
 

@@ -29,8 +29,25 @@ const userRequestHandler = (req, res) => {
       return res.end();
   
     } else if(req.url.toLowerCase() === '/submit-details' && req.method === 'POST'){
+
+      const body = []
+
+      req.on('data',(chunk)=>{
+        body.push(chunk)
+      })
+
+      req.on('end', ()=>{
+        const obj = {}
+        const bodyBuffer = Buffer.concat(body).toString()
+        const bodyObject = new URLSearchParams(bodyBuffer)
+        
+        for(const [key,value] of bodyObject.entries()){
+          obj[key] = value
+        }
+        console.log(typeof(obj))
+        fs.writeFileSync('user.txt',JSON.stringify(obj))
+      })
   
-      fs.writeFileSync('user.txt','Tanvir Ahmed')
       res.statusCode = 302 // 302 mane holo redirection
       res.setHeader('Location','/')
   
@@ -43,4 +60,4 @@ const userRequestHandler = (req, res) => {
     res.end();
   }
 
-module.export = userRequestHandler;
+module.exports = userRequestHandler;
