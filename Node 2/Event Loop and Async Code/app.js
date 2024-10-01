@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 const requestServer = (req,res) => {
   
@@ -10,6 +11,7 @@ const requestServer = (req,res) => {
       </head>
       <body>
         <h1>Home Page</h1>
+        <a href="/calculator">Calculator</a>
       </body>
     </html>
     `)
@@ -33,9 +35,22 @@ const requestServer = (req,res) => {
     `)
     res.end()
   } else if(req.url.toLowerCase() === '/calculate-result' && req.method === 'POST'){
-    res.statusCode = 302
-    res.setHeader('Location','/')
-    console.log('hiii')
+    const body = []
+
+    req.on('data',(chunk)=>{
+      body.push(chunk)
+    })
+
+    req.on('end',()=>{
+      const formObj = {}
+      const fullBody = Buffer.concat(body).toString()
+      const params = new URLSearchParams(fullBody)
+      for(const [key,value] of params.entries()){
+        formObj[key] = value
+      }
+      fs.writeFileSync('user.txt',JSON.stringify(formObj))
+    })
+
     res.end()
   }
 }
