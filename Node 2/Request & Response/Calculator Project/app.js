@@ -34,9 +34,11 @@ const requestServer = (req, res) => {
     let result ;
 
     if(req.url === '/'){
+      res.setHeader('Content-Type','text/html')
       res.write(homePage)
       res.end()
     }else if(req.url === '/calculator'){
+      res.setHeader('Content-Type','text/html')
       res.write(form)
       res.end()
     }else if(req.url === '/calculator-data' && req.method === 'POST'){
@@ -54,7 +56,6 @@ const requestServer = (req, res) => {
         result = Number(formObject.firstNumber) + Number(formObject.lastNumber) 
         console.log(result)
         fs.writeFileSync('user.txt', JSON.stringify(formObject))
-        res.write(`<h1>${result}</h1>`)
       })
       res.end()
     }
