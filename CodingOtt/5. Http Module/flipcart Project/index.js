@@ -1,3 +1,7 @@
-const convertLowerCase = require("./convertToLowerCase");
+const http = require('http')
 
-console.log(convertLowerCase('HelloWorld')) // helloworld
+const server = http.createServer((req,res)=>{
+    res.end("Hello World!!")
+})
+
+server.listen(4000)
