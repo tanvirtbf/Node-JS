@@ -14,7 +14,7 @@ const calculateResultPage = (req,res) => {
     for(const [key,value] of params.entries()){
       formObj[key] = value
     }
-    fs.writeFileSync('user.txt',JSON.stringify(formObj))
+    fs.writeFile('user.txt',JSON.stringify(formObj))
   })
   res.end()
 }
