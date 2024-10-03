@@ -1,13 +1,30 @@
 const http = require('http')
 const fs = require('fs')
+const url = require('url')
 
 const server = http.createServer((req,res)=>{
 
-  fs.readFile('./ui/index.html', (error,data)=>{
-    res.writeHead(200, {'Content-Type':'text/html'})
-    res.write(data.toString())
-    res.end()
-  })
+  const parseUrl = url.parse(req.url , true)
+  const fsPath = `./ui/${parseUrl.pathname==='/'? 'index':parseUrl.pathname.slice(1)}.html`
+  const path = parseUrl.pathname
+  console.log(fsPath)
+  console.log(path)
+  if(path === '/'){
+    fs.readFile(fsPath, (err,data)=>{
+      res.write(data)
+      return res.end()
+    })
+  }else if(path === '/login'){
+    fs.readFile(fsPath, (err,data)=>{
+      res.write(data)
+      return res.end()
+    })
+  } else if(path === '/signup'){
+    fs.readFile(fsPath, (err,data)=>{
+      res.write(data)
+      return res.end()
+    })
+  }
 
 })
 
