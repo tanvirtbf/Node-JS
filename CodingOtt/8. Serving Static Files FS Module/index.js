@@ -9,21 +9,46 @@ const server = http.createServer((req,res)=>{
   const path = parseUrl.pathname
   console.log(fsPath)
   console.log(path)
+  
   if(path === '/'){
-    fs.readFile(fsPath, (err,data)=>{
-      res.write(data)
-      return res.end()
-    })
+
+    // Sync operation for read file
+    // fs.readFile(fsPath, (err,data)=>{
+    //   res.write(data)
+    //   return res.end()
+    // })
+
+    // Async operation for read file
+    const data = fs.readFileSync(fsPath)
+    res.write(data)
+    return res.end()
+
   }else if(path === '/login'){
-    fs.readFile(fsPath, (err,data)=>{
-      res.write(data)
-      return res.end()
-    })
+
+    // Sync operation for read file
+    // fs.readFile(fsPath, (err,data)=>{
+    //   res.write(data)
+    //   return res.end()
+    // })
+
+    // Async operation for read file
+    const data = fs.readFileSync(fsPath)
+    res.write(data)
+    res.end()
+
   } else if(path === '/signup'){
-    fs.readFile(fsPath, (err,data)=>{
-      res.write(data)
-      return res.end()
-    })
+
+    // Sync operation for read file
+    // fs.readFile(fsPath, (err,data)=>{
+    //   res.write(data)
+    //   return res.end()
+    // })
+
+    // Async operation for read file
+    const data = fs.readFileSync(fsPath)
+    res.write(data)
+    return res.end()
+
   }
 
 })
