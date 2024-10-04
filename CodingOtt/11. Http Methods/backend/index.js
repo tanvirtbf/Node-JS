@@ -1,11 +1,14 @@
 const http = require('http')
+const url = require('url')
 
 const server = http.createServer((req,res)=>{
     res.writeHead(200, {
         'Access-Control-Allow-Origin': 'http://127.0.0.1:5500'
     })
-    console.log(req.url)
-    const str = JSON.stringify({name:'Tanvir', age:25})
+    const parseUrl = url.parse(req.url, true)
+    const userName = parseUrl.query.username 
+    const password = parseUrl.query.password 
+    const str = JSON.stringify({name:userName, password:password})
     res.write(str)
     res.end()
 })
