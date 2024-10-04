@@ -36,14 +36,25 @@ const server = http.createServer((req,res)=>{
   // })
 
   // fs.writeFileSync
-  try {
-    fs.writeFileSync('./static/tanvir.txt', 'Hello, This is Tanvir')
-    res.write('Success')
-    return res.end()
-  } catch (error) {
-    res.write('404 Error!')
-    return res.end()
-  }
+  // try {
+  //   fs.writeFileSync('./static/tanvir.txt', 'Hello, This is Tanvir')
+  //   res.write('Success')
+  //   return res.end()
+  // } catch (error) {
+  //   res.write('404 Error!')
+  //   return res.end()
+  // }
+
+  // fs.appendFile
+  fs.appendFile('./static/hii.txt', 'HIHIHIHIHIHI', (err,data)=>{
+    if(err){
+      res.write('Hello This is Error')
+      return res.end()
+    }else{
+      res.write('Hi World!')
+      return res.end()
+    }
+  })
 
 })
 
