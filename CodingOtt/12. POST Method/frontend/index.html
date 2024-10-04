@@ -28,7 +28,10 @@
             const username = e.target.elements.username.value
             const password = e.target.elements.password.value
             console.log(username, password)
-            
+
+            fetch(`http://localhost:3000`)
+                .then((res)=> console.log('hiii'))
+
         }
     </script>
 </body>
