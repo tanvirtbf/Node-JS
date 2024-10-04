@@ -14,8 +14,8 @@
             <h1 class="text-center font-bold text-4xl">My App</h1>
 
             <form onsubmit="login(event)" class="flex flex-col gap-2">
-                <input name="username" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="text" name="username" placeholder="username">
-                <input name="password" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="password" name="password" placeholder="password">
+                <input name="fileName" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="text" name="fileName" placeholder="FileName">
+                <input name="text" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="text" name="text" placeholder="TEXT">
                 <button class="w-[400px] bg-gray-300 p-3 rounded-md text-xl font-medium" type="submit">Submit</button>
             </form>
         </div>
@@ -25,11 +25,17 @@
     <script>
         function login(e){
             e.preventDefault()
-            const username = e.target.elements.username.value
-            const password = e.target.elements.password.value
-            console.log(username, password)
+            const fileName = e.target.elements.fileName.value
+            const text = e.target.elements.text.value
+            const data = JSON.stringify({
+                fileName,
+                text,
+            })
 
-            fetch(`http://localhost:3000`)
+            fetch(`http://localhost:3000`, {
+                method:'POST',
+                body : data
+            })
                 .then((res)=> res.json())
                 .then((data)=> console.log(data))
 
