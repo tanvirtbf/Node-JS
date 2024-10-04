@@ -14,33 +14,21 @@
             <h1 class="text-center font-bold text-4xl">My App</h1>
 
             <form onsubmit="login(event)" class="flex flex-col gap-2">
-                <input class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="text" name="username" placeholder="username">
-                <input class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="password" name="password" placeholder="password">
+                <input name="username" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="text" name="username" placeholder="username">
+                <input name="password" class="w-[400px] border border-red-200 rounded-md p-3 focus:outline-blue-300 border-[2px]" type="password" name="password" placeholder="password">
                 <button class="w-[400px] bg-gray-300 p-3 rounded-md text-xl font-medium" type="submit">Submit</button>
             </form>
         </div>
-
-
 
     </div>
 
     <script>
         function login(e){
             e.preventDefault()
-
-            const form = e.target
-            const username = form.elements.username.value
-            const password = form.elements.password.value
-
-            fetch(`http://localhost:3000/?username=${username}&password=${password}`)
-                .then((res)=> res.json())
-                .then((data)=> {
-                    const username = document.getElementById('username')
-                    const password = document.getElementById('password')
-                    username.innerHTML = data.username
-                    password.innerHTML = data.password
-                })
-                .catch((res)=> console.log('ERROR Found!'))
+            const username = e.target.elements.username.value
+            const password = e.target.elements.password.value
+            console.log(username, password)
+            
         }
     </script>
 </body>
