@@ -35,7 +35,15 @@ const server = http.createServer((req,res)=>{
   //   }
   // })
 
-  
+  // fs.writeFileSync
+  try {
+    fs.writeFileSync('./static/tanvir.txt', 'Hello, This is Tanvir')
+    res.write('Success')
+    return res.end()
+  } catch (error) {
+    res.write('404 Error!')
+    return res.end()
+  }
 
 })
 
