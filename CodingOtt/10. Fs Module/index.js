@@ -24,6 +24,19 @@ const server = http.createServer((req,res)=>{
   //   return res.end()
   // }
 
+  // fs.writeFile
+  // fs.writeFile('./static/hii.txt','Hello World!', (err, data)=>{
+  //   if(err){
+  //     res.write('404 Error!')
+  //     return res.end()
+  //   } else{
+  //     res.write('Successfully data submit')
+  //     return res.end()
+  //   }
+  // })
+
+  
+
 })
 
 server.listen(3000)
