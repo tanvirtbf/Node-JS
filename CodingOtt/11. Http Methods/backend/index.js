@@ -6,9 +6,9 @@ const server = http.createServer((req,res)=>{
         'Access-Control-Allow-Origin': 'http://127.0.0.1:5500'
     })
     const parseUrl = url.parse(req.url, true)
-    const userName = parseUrl.query.username 
+    const username = parseUrl.query.username 
     const password = parseUrl.query.password 
-    const str = JSON.stringify({name:userName, password:password})
+    const str = JSON.stringify({username:username, password:password})
     res.write(str)
     res.end()
 })

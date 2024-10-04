@@ -12,8 +12,8 @@
         <button type="submit">Submit</button>
     </form>
     <div>
-        <h1>UserName : </h1>
-        <h1>PassWord : </h1>
+        <h1 id="username">UserName : </h1>
+        <h1 id="password">PassWord : </h1>
     </div>
     <script>
         function login(e){
@@ -25,7 +25,12 @@
 
             fetch(`http://localhost:3000/?username=${username}&password=${password}`)
                 .then((res)=> res.json())
-                .then((data)=> console.log(data))
+                .then((data)=> {
+                    const username = document.getElementById('username')
+                    const password = document.getElementById('password')
+                    username.innerHTML = data.username
+                    password.innerHTML = data.password
+                })
                 .catch((res)=> console.log('ERROR Found!'))
         }
     </script>
