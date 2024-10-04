@@ -14,6 +14,16 @@ const server = http.createServer((req,res)=>{
   //   }
   // })
 
+  // fs.readFileSync
+  // try {
+  //   const data = fs.readFileSync('./static/hello.txt')
+  //   res.write(data)
+  //   return res.end()
+  // } catch (error) {
+  //   res.write('404 Not Found!')
+  //   return res.end()
+  // }
+
 })
 
 server.listen(3000)
