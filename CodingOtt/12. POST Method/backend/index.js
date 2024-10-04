@@ -19,7 +19,6 @@ const server = http.createServer((req,res)=>{
 
         const resData = JSON.stringify(mainData)
         res.write(resData)
-
         res.end()
 
     })
