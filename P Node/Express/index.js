@@ -3,7 +3,8 @@ const fs = require('fs')
 const url = require('url')
 
 const server = http.createServer((req,res)=>{
-    console.log(req.url)
+    const myUrl = url.parse(req.url, true)
+    console.log(myUrl)
     res.end('Hello World!')
 })
 
