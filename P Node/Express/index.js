@@ -5,7 +5,17 @@ const url = require('url')
 const server = http.createServer((req,res)=>{
     const myUrl = url.parse(req.url, true)
     console.log(myUrl)
-    res.end('Hello World!')
+
+    if(myUrl.pathname === '/') {
+        return res.end('Home Page')
+    } else if(myUrl.pathname === '/about') {
+        return res.end('About Page')
+    } else if(myUrl.pathname === '/contact') {
+        return res.end('Contact Page')
+    } else {
+        return res.end('404 Page Not Found!')
+    }
+    
 })
 
 const port = process.env.PORT || '3000'
