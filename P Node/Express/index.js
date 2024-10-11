@@ -1,25 +1,20 @@
 const http = require('http')
 const fs = require('fs')
 const url = require('url')
+const express = require('express')
 
-const server = http.createServer((req,res)=>{
-    const myUrl = url.parse(req.url, true)
-    console.log(myUrl)
+const app = express()
 
-    if(myUrl.pathname === '/') {
-        return res.end('Home Page')
-    } else if(myUrl.pathname === '/about') {
-        return res.end('About Page')
-    } else if(myUrl.pathname === '/contact') {
-        return res.end('Contact Page')
-    } else {
-        return res.end('404 Page Not Found!')
-    }
-    
+app.get('/',(req,res)=>{
+    res.send('Home Page')
 })
 
-const port = process.env.PORT || '3000'
-
-server.listen(port, ()=>{
-    console.log(`App Run With http://localhost:${port}`)
+app.get('/about',(req,res)=>{
+    res.send('About Page')
 })
+
+app.get('/contact',(req,res)=>{
+    res.send(`Hello ${req.query.name}`)
+})
+
+app.listen(3000, ()=> console.log(`App Run With http://localhost:${3000}`))
