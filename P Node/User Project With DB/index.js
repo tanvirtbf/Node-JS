@@ -71,6 +71,18 @@ app.post('/api/users', async (req,res)=>{
 })
 
 
+// Update User Data
+app.patch('/api/users/:id', async(req,res)=>{
+  await User.findByIdAndUpdate(req.params.id, {lastName : 'Boss'})
+  res.json({ message : 'Successfully Update'})
+})
+
+// Delete User
+app.delete('/api/users/:id', async(req,res)=>{
+  await User.findByIdAndDelete(req.params.id)
+  res.json({ message : 'Successfully Deleted!'})
+})
+
 const port = process.env.PORT || '3000'
 
 app.listen(port , ()=>{
