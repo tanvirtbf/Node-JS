@@ -40,6 +40,22 @@ const User = mongoose.model('users', userSchema)
 // Middleware for receive form data
 app.use(express.urlencoded({extended : false}))
 
+// Get User (Rest Api)
+app.get('/api/users', async (req,res)=>{
+  const allUsers = await User.find()
+  res.json(allUsers)
+})
+
+app.get('/users', async (req,res)=>{
+  const allUsers = await User.find()
+  const html = `
+    <ul>
+      ${allUsers.map((user)=> `<li>${user.firstName}</li>`)}
+    </ul>
+  `
+  res.send(html)
+})
+
 
 // Create User 
 app.post('/api/users', async (req,res)=>{
