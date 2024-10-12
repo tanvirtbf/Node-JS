@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require('fs')
 const { connectionDB } = require('./connection.js')
 const userRoutes = require('./routes/userRoutes.js')
 
@@ -8,6 +9,12 @@ connectionDB('mongodb://127.0.0.1:27017/users')
 
 // Middleware
 app.use(express.urlencoded({extended: false}))
+
+app.use((req,res,next)=>{
+    fs.appendFile('./log.txt', `${Date.now()} - ${req.url}`, (err,data)=>{
+        next();
+    })
+})
 
 // Routes
 app.use('/api/users', userRoutes)

@@ -11,13 +11,17 @@ const router = express.Router()
 router.get('', getAllUsersApi)
 router.get('/html', getAllUsers)
 
-router.get('/:id', findById)
+// route
+router.route('/:id')
+    .get(findById)
+    .patch(updateUserDetails)
+    .delete(deleteUser)
+
+// router.get('/:id', findById)
+// router.patch('/:id', updateUserDetails)
+// router.delete('/:id', deleteUser)
 
 router.post('/create', createUser)
-
-router.patch('/:id', updateUserDetails)
-
-router.delete('/:id', deleteUser)
 
 
 
