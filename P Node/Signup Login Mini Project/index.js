@@ -9,9 +9,8 @@ connectionDB('mongodb://127.0.0.1:27017/users')
 
 // Middleware
 app.use(express.urlencoded({extended: false}))
-
 app.use((req,res,next)=>{
-    fs.appendFile('./log.txt', `${Date.now()} - ${req.url}`, (err,data)=>{
+    fs.appendFile('./log.txt', `${Date.now()} - ${req.url}\n`, (err,data)=>{
         next();
     })
 })
