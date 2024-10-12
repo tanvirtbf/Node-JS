@@ -2,7 +2,6 @@ const express = require('express')
 const fs = require('fs')
 const mongoose = require('mongoose')
 
-const users = require('./users.json')
 const { type } = require('os')
 
 const app = express()
@@ -35,13 +34,13 @@ const userSchema = new mongoose.Schema({
   }
 }, {timestamps : true})
 
-// Model 
+// Model or Collection
 const User = mongoose.model('user', userSchema)
 
 
 
 // Middleware (for accept body)
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: false})) 
 
 // Middleware 
 app.use((req,res, next)=>{
@@ -66,24 +65,26 @@ app.use((req,res,next)=>{
 })
 
 // REST API (GET)
-app.get('/api/users', (req,res) => {
-  console.log(req.headers)
+app.get('/api/users', async (req,res) => {
+  const allDbUsers = await User.find()
   res.setHeader('myName', 'Tanvir Ahmed')
-  return res.json(users)
+  return res.json(allDbUsers)
 })
-app.get('/users', (req,res)=>{
+
+app.get('/users', async (req,res)=>{
+  const allDbUsers = await User.find()
   const html = `
     <ul>
-      ${users.map(user => `<li>${user.first_name}</li>`).join("")}
+      ${allDbUsers.map(user => `<li>${user.firstName} - ${user.email} - ${user.jobTitle} - ${user.gender} </li>`).join("")}
     </ul>
   `
   res.send(html)
 })
 
 // Dynamic Route
-app.get('/api/users/:id', (req,res)=>{
-  const id = Number(req.params.id)
-  const user = users.find((user)=> user.id === id)
+app.get('/api/users/:id', async (req,res)=>{
+  const user = await User.findById(req.params.id)
+  if(!user) return res.status(404).json({error : "User Not Found!"})
   return res.json(user)
 })
 
@@ -110,31 +111,23 @@ app.post('/api/users' ,async (req,res)=>{
     gender : body.gender,
     jobTitle : body.job_title
   })
-
   console.log(result)
-
   return res.status(201).json({msg : "success"})
-
-
-
-
-  // users.push({...body, id: users.length + 1})
-  // fs.writeFile('./users.json', JSON.stringify(users), (err,data)=>{
-  //   return res.json({status:'success', id: users.length + 1})
-  // })
 })
 
 
 // PATCH REST API 
-app.post('/api/users/:id' ,(req,res)=>{
-  // Create New User
-  res.json({status:'pending'})
+app.patch('/api/users/:id' , async (req,res)=>{
+  
+  await User.findByIdAndUpdate(req.params.id, { lastName : 'Ahmed Boss' })
+
+  res.json({status:'Success'})
 })
 
 // DELETE REST API 
-app.post('/api/users/:id' ,(req,res)=>{
-  // Create New User
-  res.json({status:'pending'})
+app.delete('/api/users/:id' , async (req,res)=>{
+  await User.findByIdAndDelete(req.params.id)
+  res.json({status:'success'})
 })
 
 const port = process.env.PORT || '3000'
