@@ -15,20 +15,7 @@ app.use(express.json())
 
 // Routes
 app.use('/url', urlRoute)
-app.get('/:shortId', async (req,res)=>{
-  const shortId = req.params.shortId
-  const entry = await URL.findOneAndUpdate({
-    shortId
-  }, { $push : {
-    visitHistory: {
-      timestamp : Date.now(),
-    }
-  }})
-  console.log(entry)
-  res.redirect(entry.redirectUrl)
-})
-
-
+app.use('/', urlRoute)
 
 
 const port = process.env.PORT || '3000'
