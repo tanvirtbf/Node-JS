@@ -14,8 +14,22 @@ connectDb('mongodb://127.0.0.1:27017/urlShortner')
 app.use(express.json())
 
 // Routes
+app.get('/test', async (req,res)=>{
+  const allUrls = await URL.find({})
+  return res.end(`
+    <html>
+      <head></head>
+      <body>
+        <ol>
+          ${allUrls.map(url => `<li>${url.shortId} - ${url.redirectUrl} - ${url.visitHistory.length}</li>`).join("")}
+        </ol>
+      </body>
+    </html>  
+  `)
+})
 app.use('/url', urlRoute)
-app.use('/', urlRoute)
+
+
 
 
 const port = process.env.PORT || '3000'
