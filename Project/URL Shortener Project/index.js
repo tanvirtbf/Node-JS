@@ -1,5 +1,6 @@
 const express = require('express')
 const urlRoute = require('./routes/urlRoutes.js')
+const staticRoute = require('./routes/staticRouter.js')
 const { connectDb } = require('./connection.js')
 const URL = require('./models/url.js')
 const path = require('path')
@@ -19,6 +20,7 @@ app.set('views', path.resolve('./views'))
 
 // Middleware (for accept form data as json)
 app.use(express.json())
+app.use(express.urlencoded({extended : false}))
 
 // Routes
 app.get('/test', async (req,res)=>{
@@ -29,6 +31,8 @@ app.get('/test', async (req,res)=>{
   })
 })
 app.use('/url', urlRoute)
+
+app.use('/', staticRoute)
 
 
 
