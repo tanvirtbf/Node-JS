@@ -10,8 +10,10 @@ connectDb('mongodb://127.0.0.1:27017/urlShortner')
   .then(()=> console.log('MongoDB Connected!'))
   .catch((err)=> console.log(err))
 
+// Middleware (for accept form data as json)
 app.use(express.json())
 
+// Routes
 app.use('/url', urlRoute)
 app.get('/:shortId', async (req,res)=>{
   const shortId = req.params.shortId
@@ -22,6 +24,7 @@ app.get('/:shortId', async (req,res)=>{
       timestamp : Date.now(),
     }
   }})
+  console.log(entry)
   res.redirect(entry.redirectUrl)
 })
 
