@@ -30,6 +30,7 @@ app.get('/test', async (req,res)=>{
     name : 'Tanvir'
   })
 })
+
 app.use('/url', urlRoute)
 
 app.use('/', staticRoute)

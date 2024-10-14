@@ -13,6 +13,7 @@ async function handleGenerateNewShortUrl(req, res) {
     visitHistory: [],
   });
 
+
   return res.render('index', {
     id: shortId
   })

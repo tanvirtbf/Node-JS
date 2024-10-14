@@ -8,7 +8,7 @@
 <body>
   <h1>Hey From Server</h1>
   <% urls.forEach((url) => { %>
-    <li> <%= url.shortId %> --- <%= url.redirectUrl %> </li>
+    <li> <%= url.shortId %> --- <%= url.redirectUrl %> ---- <%= url.visitHistory.length %> </li>
   <% }) %>
 </body>
 </html>
