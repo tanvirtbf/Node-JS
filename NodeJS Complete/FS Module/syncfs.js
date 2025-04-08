@@ -22,3 +22,14 @@ const filePath = path.join(__dirname, filename)
 // )
 
 
+// unlinkSync
+// const fileDelete = fs.unlinkSync(filePath)
+// console.log(fileDelete)
+
+
+// renameSync
+// const newUpdatedFileName = "testsss.txt"
+// const newFilePath = path.join(__dirname, newUpdatedFileName)
+// const renameFile = fs.renameSync(filePath, newFilePath)
+// console.log(renameFile)
+
