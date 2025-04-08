@@ -1,6 +1,11 @@
 const fs = require('fs')
+const path = require('path')
 
 const filename = 'test.txt'
-fs.writeFileSync(filename, "This is the initial Data", "utf-8")
+const filePath = path.join(__dirname, filename)
+
+// writeFileSync
+// fs.writeFileSync(filePath, "This is the initial Updated Data", "utf-8")
 
 
+// readFileSync
