@@ -8,8 +8,12 @@ const mult = (a,b) => {
     return a*b;
 }
 
-module.exports = {
-    add,
-    subs,
-    mult
-}
+module.exports.add = add;
+module.exports.subs = subs;
+module.exports.mult = mult;
+
+// module.exports = {
+//     add,
+//     subs,
+//     mult
+// }
