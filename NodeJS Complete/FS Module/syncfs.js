@@ -9,3 +9,8 @@ const filePath = path.join(__dirname, filename)
 
 
 // readFileSync
+const readFile = fs.readFileSync(filePath, 'utf-8')
+console.log(readFile.toString())
+console.log(readFile)
+
+
