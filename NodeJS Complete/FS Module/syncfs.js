@@ -9,8 +9,16 @@ const filePath = path.join(__dirname, filename)
 
 
 // readFileSync
-const readFile = fs.readFileSync(filePath, 'utf-8')
-console.log(readFile.toString())
-console.log(readFile)
+// const readFile = fs.readFileSync(filePath, 'utf-8')
+// console.log(readFile.toString())
+// console.log(readFile)
+
+
+// appendFileSync
+// const appendFile = fs.appendFileSync(
+//     filePath,
+//     "\nThis is the appended data",
+//     "utf-8"
+// )
 
 
