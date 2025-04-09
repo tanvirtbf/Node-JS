@@ -2,7 +2,7 @@ import { readFile } from 'fs/promises';
 import {createServer} from 'http';
 import path from 'path';
 
-const PORT = 3000
+const PORT = 3000;
 
 const serveFile = async (res, filePath, contentType) => {
     try {
