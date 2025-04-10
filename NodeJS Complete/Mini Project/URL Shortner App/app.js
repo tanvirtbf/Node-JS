@@ -50,9 +50,7 @@ const server = createServer( async (req, res)=>{
         const links = await loadLinks()
 
         let body = ""
-        req.on("data", (chunk) => {
-            body = body + chunk;
-        })
+        req.on("data", (chunk) => body += chunk)
         req.on("end", async() => {
             console.log(body)
             const {url, shortCode} = JSON.parse(body)
