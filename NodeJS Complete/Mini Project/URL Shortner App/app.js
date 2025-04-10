@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import {createServer} from 'http';
+import crypto from 'crypto';
 import path from 'path';
 
 const PORT = 3000;
@@ -15,6 +16,19 @@ const serveFile = async (res, filePath, contentType) => {
     }
 }
 
+const loadLinks = async () => {
+    try {
+        const data = await readFile(url, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            await writeFile(url, JSON.stringify({}));
+            return {}
+        }
+        throw error;
+    }
+}
+
 const server = createServer( async (req, res)=>{
     console.log(req.url)
     if(req.method === "GET"){
@@ -26,6 +40,9 @@ const server = createServer( async (req, res)=>{
     }
 
     if(req.method === "POST" && req.url === "/shorten"){
+
+        const links = await loadLinks()
+
         let body = ""
         req.on("data", (chunk) => {
             body = body + chunk;
@@ -37,11 +54,12 @@ const server = createServer( async (req, res)=>{
                 res.writeHead(400, {'Content-Type': 'text/plain'});
                 return res.end('URL is required!');
             }
+            const finalShortCode = shortCode || crypto.randomBytes(3).toString('hex')
         })
     }
         
 })
-
+``````````````````
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 })
