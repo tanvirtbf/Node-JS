@@ -24,6 +24,21 @@ const server = createServer( async (req, res)=>{
             return serveFile(res, path.join('public','style.css'), 'text/css')
         }
     }
+
+    if(req.method === "POST" && req.url === "/shorten"){
+        let body = ""
+        req.on("data", (chunk) => {
+            body = body + chunk;
+        })
+        req.on("end", () => {
+            console.log(body)
+            const {url, shortCode} = JSON.parse(body)
+            if(!url){
+                res.writeHead(400, {'Content-Type': 'text/plain'});
+                return res.end('URL is required!');
+            }
+        })
+    }
         
 })
 
