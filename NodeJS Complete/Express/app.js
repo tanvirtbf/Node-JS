@@ -1,7 +1,14 @@
 import express from "express";
 import { PORT } from "./env.js";
+import Path from 'path'
 
 const app = express();
+
+app.get('/public', (req, res) => {
+  const __fileName = new URL(import.meta.url)
+  const publicPage = Path.join(import.meta.dirname, "public", "index.html")
+  res.sendFile(publicPage)
+})
 
 app.get('/', (req, res) => {
     return res.send('<h1>Hello World!</h1>')
