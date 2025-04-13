@@ -10,7 +10,7 @@ app.use(express.static(absolutePath))
 app.get('/profile/:username', (req, res) => {
     console.log(req.params); // { username: 'sadia' }
     console.log(req.params.username); // sadia
-    res.send('Hi!')
+    res.send(req.params.username)
 })
 
 app.listen(PORT, () => {
