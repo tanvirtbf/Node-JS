@@ -13,6 +13,11 @@ app.get('/profile/:username', (req, res) => {
     res.send(req.params.username)
 })
 
+app.get('/profile/:username/age/:myage', (req, res) => {
+    console.log(req.params); // { username: 'tanvir', myage: '24' }
+    res.send(req.params.username) // tanvir
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:3000`)
 })
