@@ -7,6 +7,12 @@ const app = express();
 const absolutePath = path.join(import.meta.dirname, 'public')
 app.use(express.static(absolutePath))
 
+app.get('/contact', (req, res) => {
+    console.log(req.query);
+    res.redirect('/')
+})
+
+
 // Practice Route Parameter
 // app.get('/profile/:username', (req, res) => {
 //     console.log(req.params); // { username: 'sadia' }
