@@ -4,7 +4,11 @@ import path from "path";
 
 const app = express();
 
-
+app.use(express.static("public"))
+app.get('/', (req, res)=>{
+  const __fileName = path.join(import.meta.dirname, "public", "index.html")
+  res.sendFile(__fileName)
+})
 
 
 // const absolutePath = path.join(import.meta.dirname, "public")
