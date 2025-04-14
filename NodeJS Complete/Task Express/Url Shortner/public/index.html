@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Form Submission</title>
   </head>
   <body>
     <form id="shortened-form">
@@ -26,14 +26,13 @@
 
     <script>
       const form = document.getElementById("shortened-form");
-      let name;
-      let password;
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const formData = new FormData(form);
-        name = formData.get("name");
-        password = formData.get("password");
-        console.log(name, password);
+        const name = formData.get("name");
+        const password = formData.get("password");
+
         try {
           const response = await fetch("http://localhost:3000/shorten", {
             method: "POST",
@@ -45,6 +44,12 @@
 
           const data = await response.json();
           console.log("Server Response:", data);
+
+          // Optional: Display data in the list
+          const ul = document.getElementById("shortened-list");
+          const li = document.createElement("li");
+          li.textContent = `Name: ${data.name}, Password: ${data.password}`;
+          ul.appendChild(li);
 
           alert("Data Saved Successfully!");
         } catch (error) {
