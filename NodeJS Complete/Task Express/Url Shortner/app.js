@@ -6,11 +6,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 // express router
-app.use(router)
-
+// app.use(router)
+app.use(shortenerRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
