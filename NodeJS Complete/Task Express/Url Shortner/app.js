@@ -2,7 +2,6 @@ import { readFile, writeFile } from "fs/promises";
 import crypto from "crypto";
 import path from "path";
 import fs from "fs/promises";
-
 import express from "express";
 
 const app = express();
@@ -80,6 +79,7 @@ app.post("/", async (req, res) => {
 
   links[finalShortCode] = url;
   await saveLinks(links);
+  return res.redirect('/')
 });
 
 
