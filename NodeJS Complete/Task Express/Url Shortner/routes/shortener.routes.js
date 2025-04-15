@@ -81,4 +81,5 @@ await writeFile(DATA_FILE, JSON.stringify(links));
     return res.redirect('/')
   });
   
-  export default router;
+//   export default router;
+export const shortenerRoutes = router;
