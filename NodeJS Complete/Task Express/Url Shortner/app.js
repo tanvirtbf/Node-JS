@@ -1,6 +1,16 @@
+import express from 'express'
+import path from 'path'
+
+const app = express()
+
+const filePath = path.join(import.meta.dirname, 'public', 'style.css')
+
+app.use(express.static(filePath))
 
 
-
+app.listen(3000, () => {
+  console.log(`PORT Running in http://localhost:3000/`);
+})
 
 
 
