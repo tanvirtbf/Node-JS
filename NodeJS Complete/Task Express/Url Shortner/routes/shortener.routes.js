@@ -26,11 +26,12 @@ const saveLinks = async (links) => {
 };
 
 router.get('/report', (req, res) => {
-  const student = {
-    name: 'Tanvir', 
-    grade: '12th',
-    favSubject: 'Mathematics'
-  }
+  const student = [
+    {name: 'Tanvir', grade: '12th', favSubject: 'Mathematics'},
+    {name: 'Sadia', grade: '10th', favSubject: 'Physics'},
+    {name: 'Maymuna', grade: '11th', favSubject: 'Chemistry'},
+    {name: 'Humaira', grade: '8th', favSubject: 'English'}
+  ]
   res.render('report', { student })
 })
 
