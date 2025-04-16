@@ -26,7 +26,12 @@ const saveLinks = async (links) => {
 };
 
 router.get('/report', (req, res) => {
-  res.render('report')
+  const student = {
+    name: 'Tanvir', 
+    grade: '12th',
+    favSubject: 'Mathematics'
+  }
+  res.render('report', { student })
 })
 
 router.get("/", async (req, res) => {
