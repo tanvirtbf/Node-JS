@@ -1,10 +1,9 @@
 import { readFile, writeFile } from "fs/promises";
-import crypto from "crypto";
 import path from "path";
-import fs from "fs/promises";
-import express from "express";
+import { Router } from "express";
+import crypto from "crypto";
 
-const router = express.Router();
+const router = Router();
 
 const DATA_FILE = path.join("data", "links.json");
 
@@ -25,34 +24,58 @@ const saveLinks = async (links) => {
   await writeFile(DATA_FILE, JSON.stringify(links));
 };
 
-router.get('/report', (req, res) => {
-  const student = [
-    {name: 'Tanvir', grade: '12th', favSubject: 'Mathematics'},
-    {name: 'Sadia', grade: '10th', favSubject: 'Physics'},
-    {name: 'Maymuna', grade: '11th', favSubject: 'Chemistry'},
-    {name: 'Humaira', grade: '8th', favSubject: 'English'}
-  ]
-  res.render('report', { student })
-})
+// router.get("/report", (req, res) => {
+//   const student = [
+//     { name: "Aarav", grade: "10th", favoriteSubject: "Mathematics" },
+//     { name: "Ishita", grade: "9th", favoriteSubject: "Science" },
+//     { name: "Rohan", grade: "8th", favoriteSubject: "History" },
+//     { name: "Meera", grade: "10th", favoriteSubject: "English" },
+//     { name: "Kabir", grade: "11th", favoriteSubject: "Physics" },
+//   ];
+//   return res.render("report", { student });
+// });
 
 router.get("/", async (req, res) => {
   try {
-    const file = await fs.readFile(path.join("views", "index.html"));
+    const file = await readFile(path.join("views", "index.html"));
     const links = await loadLinks();
 
     const content = file.toString().replaceAll(
-      "{{ shortened-urls }}",
+      "{{ shortened_urls }}",
       Object.entries(links)
-        .map(
-          ([shortCode, url]) =>
-            `<li><a href="/${shortCode}" target="_blank">${req.host}/${shortCode}</a> -> ${url} </li>`
-        )
+        .map(([shortCode, url]) => {
+          url = url.length >= 30 ? `${url.slice(0, 30)}...` : url;
+          return `<li><a href="/${shortCode}" target="_blank">${req.host}/${shortCode}</a> - ${url}</li>`;
+        })
         .join("")
     );
     return res.send(content);
   } catch (error) {
     console.error(error);
-    return res.status(500).send("Internal Server Error!");
+    return res.status(500).send("Internal server error");
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const { url, shortCode } = req.body;
+    const finalShortCode = shortCode || crypto.randomBytes(4).toString("hex");
+
+    const links = await loadLinks();
+
+    if (links[finalShortCode]) {
+      return res
+        .status(400)
+        .send("Short code already exists. Please choose another.");
+    }
+
+    links[finalShortCode] = url;
+
+    await saveLinks(links);
+    return res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Internal server error");
   }
 });
 
@@ -61,32 +84,17 @@ router.get("/:shortCode", async (req, res) => {
     const { shortCode } = req.params;
     const links = await loadLinks();
 
-    if (!links[shortCode]) return res.status(404).send("404 error occured");
+    if (!links[shortCode]) return res.status(404).send("404 error occurred");
 
     return res.redirect(links[shortCode]);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Internal Server Error!");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Internal server error");
   }
 });
 
-router.post("/", async (req, res) => {
-  const { url, shortCode } = req.body;
+//default export
+// export default router;
 
-  const finalShortCode = shortCode || crypto.randomBytes(4).toString("hex");
-
-  const links = await loadLinks();
-
-  if (links[finalShortCode]) {
-    return res
-      .status(400)
-      .send("Short code already exists. Please choose another");
-  }
-
-  links[finalShortCode] = url;
-  await saveLinks(links);
-  return res.redirect("/");
-});
-
-//   export default router;
+// Named exports
 export const shortenerRoutes = router;
