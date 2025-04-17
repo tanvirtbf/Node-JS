@@ -1,7 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { Router } from "express";
-import crypto from "crypto";
+
+import { postURLShortener } from "../controller/postshortener.controller.js";
 
 const router = Router();
 
@@ -23,6 +24,8 @@ const loadLinks = async () => {
 const saveLinks = async (links) => {
   await writeFile(DATA_FILE, JSON.stringify(links));
 };
+
+router.post('/', postURLShortener);
 
 // router.get("/report", (req, res) => {
 //   const student = [
@@ -56,28 +59,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const { url, shortCode } = req.body;
-    const finalShortCode = shortCode || crypto.randomBytes(4).toString("hex");
 
-    const links = await loadLinks();
-
-    if (links[finalShortCode]) {
-      return res
-        .status(400)
-        .send("Short code already exists. Please choose another.");
-    }
-
-    links[finalShortCode] = url;
-
-    await saveLinks(links);
-    return res.redirect("/");
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Internal server error");
-  }
-});
 
 router.get("/:shortCode", async (req, res) => {
   try {
