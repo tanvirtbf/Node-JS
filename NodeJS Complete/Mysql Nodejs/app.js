@@ -41,6 +41,10 @@ console.log("Mysql connection established");
 // ]
 // await db.query(`INSERT INTO users (username, email)  VALUES ?`, [values]);
 
+
+// // 5. Update data in the table
+await db.execute(`UPDATE users SET username = ? WHERE id = ?`, ['Tanvir Ahmed', 1]);
+
 // Read data from the table
 const [rows, fields] = await db.execute(`SELECT * FROM users`);
 console.log(rows);
