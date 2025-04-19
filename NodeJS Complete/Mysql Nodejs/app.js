@@ -43,13 +43,18 @@ console.log("Mysql connection established");
 
 
 // // 5. Update data in the table
-try {
-    await db.execute(`UPDATE users SET username = ? WHERE id = ?`, ['Tanvir Ahmed', 1]);
-    console.log("User updated successfully");
-} catch (error) {
-    console.error("Error updating user:", error.message);
-}
+// try {
+// await db.execute(`UPDATE users SET username = ? WHERE id = ?`, ['Tanvir Ahmed', 1]);
+// console.log("User updated successfully");
+// } catch (error) {
+//     console.error("Error updating user:", error.message);
+// }
+
+
+// // 6. Delete data from the table
+await db.execute(`DELETE FROM users WHERE id = ?`, [1]);
 
 // Read data from the table
 const [rows, fields] = await db.execute(`SELECT * FROM users`);
 console.log(rows);
+
