@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 
 app.use(userRouter); // this is used to mount the router on the app
 
-app.use(hostRouter); // this is used to mount the router on the app
+app.use("/host", hostRouter); // this is used to mount the router on the app
 
 app.use((req, res, next) => {
   res.status(404).send("<h1>Page not found</h1>");
