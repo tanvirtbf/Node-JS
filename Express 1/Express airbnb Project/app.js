@@ -1,26 +1,20 @@
 // External Module
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const userRouter = require("./routes/userRouter");
+const hostRouter = require("./routes/hostRouter"); // this is used to import the router
 
 const app = express();
 
-const hostRouter = require('./routes/host');
-const userRouter = require('./routes/user');
-
+app.use(express.urlencoded({ extended: false })); // this is used to parse the body and set it in req.
 
 app.use((req, res, next) => {
   console.log(req.url, req.method);
   next();
 });
 
-app.get('/', (req, res, next) => {
-  res.send(`Welcome to the home page!<br /> Please select a Home to view:<br />
-    <a href="/add-home">Click here to add a home</a>
-    `);
-})
+app.use(userRouter); // this is used to mount the router on the app
 
-
-
+app.use(hostRouter); // this is used to mount the router on the app
 
 const PORT = 3000;
 app.listen(PORT, () => {
