@@ -1,24 +1,23 @@
+// Core Module
+const path = require('path');
+
 // External Module
-const express = require("express");
-const userRouter = require("./routes/userRouter");
-const hostRouter = require("./routes/hostRouter"); // this is used to import the router
+const express = require('express');
+
+//Local Module
+const userRouter = require("./routes/userRouter")
+const hostRouter = require("./routes/hostRouter")
+const rootDir = require("./utils/pathUtil");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false })); // this is used to parse the body and set it in req.
+app.use(express.urlencoded());
+app.use(userRouter);
+app.use("/host", hostRouter);
 
 app.use((req, res, next) => {
-  console.log(req.url, req.method);
-  next();
-});
-
-app.use(userRouter); // this is used to mount the router on the app
-
-app.use("/host", hostRouter); // this is used to mount the router on the app
-
-app.use((req, res, next) => {
-  res.status(404).send("<h1>Page not found</h1>");
-}); // this is used to handle the error . Because this is the last middleware, it will be executed if no other middleware is executed before this. I mean no other middleware cannot send response before this. So this is the last middleware and this is send the response.
+  res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {

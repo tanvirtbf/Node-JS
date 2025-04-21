@@ -1,11 +1,15 @@
-const express = require("express");
+// Core Modules
+const path = require('path');
 
+// External Module
+const express = require('express');
 const userRouter = express.Router();
 
+// Local Module
+const rootDir = require("../utils/pathUtil");
+
 userRouter.get("/", (req, res, next) => {
-  res.send(`Welcome to the home page!<br /> Please select a Home to view:<br />
-      <a href="/host/add-home">Click here to add a home</a>
-      `);
+  res.sendFile(path.join(rootDir, 'views', 'home.html'));
 });
 
 module.exports = userRouter;
