@@ -19,7 +19,6 @@ app.use("/", (req, res, next) => {
   res.send("<p>Came from another Middleware</p>");
 });
 
-
 const PORT = 3002;
 app.listen(PORT, () => {
   console.log(`Server running on address http://localhost:${PORT}`);
