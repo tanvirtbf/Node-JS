@@ -7,10 +7,19 @@ const app = express();
 const hostRouter = require('./routes/host');
 const userRouter = require('./routes/user');
 
+
 app.use((req, res, next) => {
   console.log(req.url, req.method);
-  res.send("<h1>Welcome to AirBnb Server</h1>");
+  next();
 });
+
+app.get('/', (req, res, next) => {
+  res.send(`Welcome to the home page!<br /> Please select a Home to view:<br />
+    <a href="/add-home">Click here to add a home</a>
+    `);
+})
+
+
 
 
 const PORT = 3000;
