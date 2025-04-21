@@ -16,6 +16,10 @@ app.use(userRouter); // this is used to mount the router on the app
 
 app.use(hostRouter); // this is used to mount the router on the app
 
+app.use((req, res, next) => {
+  res.status(404).send("<h1>Page not found</h1>");
+}); // this is used to handle the error . Because this is the last middleware, it will be executed if no other middleware is executed before this. I mean no other middleware cannot send response before this. So this is the last middleware and this is send the response.
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on address http://localhost:${PORT}`);
