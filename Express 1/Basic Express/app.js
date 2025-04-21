@@ -32,35 +32,35 @@ const app = express();
 // });
 
 // Method Middleware Testing
-app.get('/', (req, res, next) => {
-  console.log("Came in first Get middleware", req.url, req.method);
-  next();
-})
+// app.get('/', (req, res, next) => {
+//   console.log("Came in first Get middleware", req.url, req.method);
+//   next();
+// })
 
-app.get('/', (req, res, next) => {
-  console.log("Came in Second Get middleware", req.url, req.method);
-  res.send("<p>Came from Second Middleware</p>");
-})
+// app.get('/', (req, res, next) => {
+//   console.log("Came in Second Get middleware", req.url, req.method);
+//   res.send("<p>Came from Second Middleware</p>");
+// })
 
-app.get('/hello', (req, res, next) => {
-  console.log("Came in first Hello middleware", req.url, req.method);
-  next();
-})
+// app.get('/hello', (req, res, next) => {
+//   console.log("Came in first Hello middleware", req.url, req.method);
+//   next();
+// })
 
-app.get('/hello', (req, res, next) => {
-  console.log("Came in second Hello middleware", req.url, req.method);
-  res.send("<p>Came from Second Hello Middleware</p>");
-})
+// app.get('/hello', (req, res, next) => {
+//   console.log("Came in second Hello middleware", req.url, req.method);
+//   res.send("<p>Came from Second Hello Middleware</p>");
+// })
 
-app.post('/submit-details', (req, res, next) => {
-  console.log("Came in first Post middleware", req.url, req.method);
-  next();
-})
+// app.post('/submit-details', (req, res, next) => {
+//   console.log("Came in first Post middleware", req.url, req.method);
+//   next();
+// })
 
-app.post('/submit-details', (req, res, next) => {
-  console.log("Came in second Post middleware", req.url, req.method);
-  res.send("<p>Came from Second Post Middleware</p>");
-})
+// app.post('/submit-details', (req, res, next) => {
+//   console.log("Came in second Post middleware", req.url, req.method);
+//   res.send("<p>Came from Second Post Middleware</p>");
+// })
 
 
 // app.post("/submit-details", (req, res, next) => {
