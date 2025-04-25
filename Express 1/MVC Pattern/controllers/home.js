@@ -5,7 +5,7 @@ exports.getAddHome = (req, res, next) => {
   });
 };
 
-const registeredHomes = [];
+
 
 exports.postAddHome = (req, res, next) => {
   console.log("Home Registration successful for:", req.body);
