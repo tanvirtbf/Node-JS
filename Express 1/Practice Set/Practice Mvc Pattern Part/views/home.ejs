@@ -1,11 +1,14 @@
 <%- include('partials/head') %>
 <body>
-    <% userInfo.forEach((item) => { %>
+    <% userInfo.forEach((item, i) => { %>
         <div>
+            <div>------------- <%= i+1 %> Number User -------------</div>
             <%= item.fullname %><br>
             <%= item.email %><br>
             <%= item.password %>
         </div>
     <% }) %>
+
+    <a href="/user/userInfo">Set a User!</a>
 </body>
 </html>

@@ -12,5 +12,5 @@ export const userPostController = (req, res) => {
     const user = new User(fullname, email, password)
     user.save();
 
-    res.send('Successfully Posted a Form!')
+    res.send('Successfully Posted a Form! Go to Home : <a href="/">Home</a>')
 }
