@@ -13,5 +13,10 @@ module.exports = class Home {
     save() {
         registeredHomes.push(this)
     }
+
+    static fetchAll(){
+        return registeredHomes;
+    }
+
 }
 
