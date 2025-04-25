@@ -1,4 +1,9 @@
+const fs = require('fs')
+const path = require('path')
+
+
 const Home = require("../models/home");
+const path = require('path');
 
 exports.getAddHome = (req, res, next) => {
   res.render("addHome", {
