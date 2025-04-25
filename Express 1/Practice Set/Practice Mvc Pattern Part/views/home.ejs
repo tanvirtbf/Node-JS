@@ -1,5 +1,11 @@
 <%- include('partials/head') %>
 <body>
-    <h1>Hello World!</h1>
+    <% userInfo.forEach((item) => { %>
+        <div>
+            <%= item.fullname %><br>
+            <%= item.email %><br>
+            <%= item.password %>
+        </div>
+    <% }) %>
 </body>
 </html>

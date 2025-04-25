@@ -2,6 +2,7 @@ import express from 'express'
 import homeRouter from './routes/homeRouter.js';
 import path from 'path';
 import { rootDir } from './utils/pathUtil.js';
+import userRouter from './routes/userForm.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs')
 app.set('views', 'views')
 
 app.use(homeRouter)
+app.use('/user', userRouter)
 
 app.use((req, res, next) => {
     res.send('404 page not found!')
