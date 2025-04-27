@@ -1,5 +1,6 @@
+const { register } = require("module");
 const Home = require("../models/home");
-const path = require('path');
+const path = require("path");
 
 exports.getAddHome = (req, res, next) => {
   res.render("addHome", {
@@ -9,8 +10,8 @@ exports.getAddHome = (req, res, next) => {
 };
 
 exports.postAddHome = (req, res, next) => {
-  const {houseName, price, location, rating, photoUrl} = req.body
-  const home = new Home(houseName, price, location, rating, photoUrl)
+  const { houseName, price, location, rating, photoUrl } = req.body;
+  const home = new Home(houseName, price, location, rating, photoUrl);
   home.save();
 
   res.render("homeAdded", {
@@ -20,11 +21,11 @@ exports.postAddHome = (req, res, next) => {
 };
 
 exports.getHome = (req, res, next) => {
-  const registeredHomes = Home.fetchAll();
-  res.render("home", {
-    registeredHomes: registeredHomes,
-    pageTitle: "airbnb Home",
-    currentPage: "Home",
-  });
+  Home.fetchAll((registeredHomes) =>
+    res.render("home", {
+      registeredHomes: registeredHomes,
+      pageTitle: "airbnb Home",
+      currentPage: "Home",
+    })
+  );
 };
-

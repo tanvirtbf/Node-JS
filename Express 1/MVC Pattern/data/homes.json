@@ -1,1 +1,9 @@
-[{"houseName":"Tanvir ","price":"52","location":"Dhaka","rating":"5","photoUrl":"https://cdn.beautybooth.com.bd/uploads/all/GJfRnoja5TQwrPkHCbmbbtHs0w8PxiUU1ipHPqzM.webp"}]
+[
+  {
+    "houseName": "Tanvir ",
+    "price": "52",
+    "location": "Dhaka",
+    "rating": "5",
+    "photoUrl": "https://cdn.beautybooth.com.bd/uploads/all/GJfRnoja5TQwrPkHCbmbbtHs0w8PxiUU1ipHPqzM.webp"
+  }
+]
