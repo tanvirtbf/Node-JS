@@ -1,4 +1,3 @@
-
 const Home = require("../models/home");
 const path = require('path');
 

@@ -3,7 +3,7 @@ const path = require("path");
 const rootDir = require("../utils/pathUtil");
 
 // fake database
-const registeredHomes = [];
+let registeredHomes = [];
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl) {
@@ -23,6 +23,13 @@ module.exports = class Home {
   }
 
   static fetchAll() {
-    return registeredHomes;
+    const homeDataPath = path.join(rootDir, "data", "homes.json");
+    fs.readFile(homeDataPath, (err, data) => {
+      console.log('File read: ', err, JSON.parse(data));
+      if(!err){
+        registeredHomes =  JSON.parse(data)
+      }
+      return registeredHomes;
+    })
   }
 };
