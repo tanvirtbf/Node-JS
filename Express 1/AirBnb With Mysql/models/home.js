@@ -12,7 +12,7 @@ module.exports = class Home {
 
   save() {}
 
-  static fetchAll(callback) {
+  static fetchAll() {
     return db.execute("SELECT * FROM homes")
   }
 
