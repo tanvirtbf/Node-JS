@@ -1,4 +1,5 @@
 // Core Modules
+const db = require("../utils/databaseUtil");
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl) {
@@ -9,19 +10,13 @@ module.exports = class Home {
     this.photoUrl = photoUrl;
   }
 
-  save() {
-
-  }
+  save() {}
 
   static fetchAll(callback) {
-
+    return db.execute("SELECT * FROM homes")
   }
 
-  static findById(homeId, callback) {
+  static findById(homeId, callback) {}
 
-  }
-
-  static deleteById(homeId, callback) {
-
-  }
+  static deleteById(homeId, callback) {}
 };
