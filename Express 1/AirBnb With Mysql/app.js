@@ -12,8 +12,8 @@ const errorsController = require("./controllers/errors");
 const db = require("./utils/databaseUtil")
 
 db.execute('SELECT * FROM homes')
-  .then(result => {
-    console.log('Getting From Db : ', result);
+  .then(([rows, field]) => {
+    console.log('Getting From Db : ', rows);
   })
   .catch(error => {
     console.log('Error While reading Home Records : ', error);
