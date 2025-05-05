@@ -39,7 +39,6 @@ exports.getFavouriteList = (req, res, next) => {
       })
     });
   })
-
 };
 
 exports.postAddToFavourite = (req, res, next) => {
