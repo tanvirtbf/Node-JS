@@ -24,7 +24,7 @@ app.use(express.static(path.join(rootDir, 'public')))
 
 app.use(errorsController.pageNotFound);
 
-const PORT = 3001;
+const PORT = 3000;
 const DB_PATH = "mongodb+srv://root:root@cluster0.klfbmop.mongodb.net/airbnb?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(DB_PATH).then(() => {
